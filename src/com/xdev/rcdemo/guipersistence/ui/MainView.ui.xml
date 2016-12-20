@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<?xdevuiml version="1.0"?>
+<?template BROWSER_XGA?>
+<?import ??>
+<?import com.xdev.rcdemo.guipersistence.entities.Customer?>
+<?import com.xdev.rcdemo.guipersistence.entities.Employee?>
+<?import com.xdev.rcdemo.guipersistence.entities.Order?>
+<?import com.xdev.rcdemo.guipersistence.entities.Region?>
+<?import com.xdev.rcdemo.guipersistence.entities.Shipper?>
+<?import com.xdev.ui.XdevButton?>
+<?import com.xdev.ui.XdevCheckBox?>
+<?import com.xdev.ui.XdevColorPicker?>
+<?import com.xdev.ui.XdevFormLayout?>
+<?import com.xdev.ui.XdevGridLayout?>
+<?import com.xdev.ui.XdevHorizontalLayout?>
+<?import com.xdev.ui.XdevHorizontalSplitPanel?>
+<?import com.xdev.ui.XdevPanel?>
+<?import com.xdev.ui.XdevPopupDateField?>
+<?import com.xdev.ui.XdevSlider?>
+<?import com.xdev.ui.XdevTabSheet?>
+<?import com.xdev.ui.XdevTextField?>
+<?import com.xdev.ui.XdevTree?>
+<?import com.xdev.ui.XdevView?>
+<?import com.xdev.ui.entitycomponent.combobox.XdevComboBox?>
+<?import com.xdev.ui.entitycomponent.table.XdevTable?>
+<?import java.lang.Integer?>
+<?import java.lang.String?>
+<?import java.math.BigDecimal?>
+<?import java.util.Date?>
+<XdevView xmlns:x="http://xml.xdev-software.com/xdevuiml" x:name="MainView">
+    <x:constraints zpos="0" width="100%" height="100%" />
+    <XdevGridLayout x:name="gridLayout">
+        <x:constraints zpos="0" width="100%" height="100%" />
+        <XdevHorizontalLayout x:name="horizontalLayout" margin="">
+            <x:constraints gridx="1" gridy="1" weighty="0.0" weightx="0.1" width="100%" />
+            <XdevButton icon="FontAwesome.SAVE" caption="Save" x:name="cmdSave">
+                <x:constraints weightx="0.0" />
+                <x:event>click.buttonClick</x:event>
+            </XdevButton>
+            <XdevButton icon="FontAwesome.FOLDER_OPEN_O" caption="Load" enabled="false" x:name="cmdLoad">
+                <x:constraints weightx="0.0" />
+                <x:event>click.buttonClick</x:event>
+            </XdevButton>
+        </XdevHorizontalLayout>
+        <XdevTabSheet styleName="framed" x:name="tabSheet" x:selectedTabIndex="0">
+            <x:constraints gridx="1" gridy="2" weighty="1.0" weightx="0.1" width="100%" height="100%" />
+            <XdevTable columnReorderingAllowed="true" caption="Tab" x:name="table" x:persist="true" columnCollapsingAllowed="true" x:entity="Order" x:autoQuery="false">
+                <x:entityProperties>
+                    <entry type="Integer" property="orderid" />
+                    <entry type="Customer" property="customer" />
+                    <entry type="Employee" property="employee" />
+                    <entry type="Shipper" property="shipper" />
+                    <entry type="Date" property="orderdate" />
+                    <entry type="Date" property="requireddate" />
+                    <entry type="Date" property="shippeddate" />
+                    <entry type="BigDecimal" property="freight" />
+                    <entry type="String" property="shipname" />
+                    <entry type="String" property="shipaddress" />
+                    <entry type="String" property="shipcity" />
+                    <entry type="String" property="shipregion" />
+                    <entry type="String" property="shippostalcode" />
+                    <entry type="String" property="shipcountry" />
+                </x:entityProperties>
+                <x:constraints width="100%" height="100%" />
+                <x:typeArguments>
+                    <typeArgument type="Order" />
+                </x:typeArguments>
+                <x:data methodName="findAll" />
+            </XdevTable>
+            <XdevHorizontalSplitPanel caption="Tab" x:name="horizontalSplitPanel" x:persist="true">
+                <x:constraints width="100%" height="100%" />
+                <XdevPanel x:name="panel">
+                    <x:constraints splitPos="FIRST" width="100%" height="100%" />
+                    <XdevTree x:name="tree" x:persist="true" x:entity="Region">
+                        <x:treeDataLevels>
+                            <level>territories</level>
+                            <level>employees</level>
+                            <level>orders</level>
+                            <level>orderdetails</level>
+                        </x:treeDataLevels>
+                        <x:constraints splitPos="FIRST" zpos="0" />
+                        <x:typeArguments>
+                            <typeArgument type="Region" />
+                        </x:typeArguments>
+                        <x:data methodName="findAll" />
+                    </XdevTree>
+                </XdevPanel>
+                <XdevFormLayout x:name="formLayout">
+                    <x:constraints splitPos="SECOND" width="100%" height="100%" />
+                    <XdevTextField caption="TextField" x:name="textField" x:persist="true" persistValue="true" />
+                    <XdevPopupDateField caption="PopupDateField" x:name="popupDateField" x:persist="true" persistValue="true" />
+                    <XdevComboBox caption="ComboBox" x:name="comboBox" x:persist="true" x:autoQuery="false" persistValue="true">
+                        <x:typeArguments>
+                            <typeArgument type="?" />
+                        </x:typeArguments>
+                    </XdevComboBox>
+                    <XdevSlider caption="Slider" x:name="slider" x:persist="true" persistValue="true" />
+                    <XdevColorPicker caption="ColorPicker" x:name="colorPicker" x:persist="true" persistValue="true" />
+                    <XdevCheckBox caption="CheckBox" x:name="checkBox" x:persist="true" persistValue="true" />
+                </XdevFormLayout>
+            </XdevHorizontalSplitPanel>
+        </XdevTabSheet>
+    </XdevGridLayout>
+</XdevView>
+
