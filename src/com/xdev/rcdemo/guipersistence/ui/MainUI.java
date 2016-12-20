@@ -10,7 +10,7 @@ import com.xdev.ui.XdevUI;
 import com.xdev.ui.navigation.XdevNavigator;
 
 @Push(value = PushMode.MANUAL, transport = Transport.LONG_POLLING)
-@Theme("rapidclipse-demo-guipersistence")
+@Theme("rapidclipse_demo_guipersistence")
 public class MainUI extends XdevUI {
 	public MainUI() {
 		super();
@@ -20,7 +20,7 @@ public class MainUI extends XdevUI {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void init(VaadinRequest request) {
+	public void init(final VaadinRequest request) {
 		this.initUI();
 	}
 
